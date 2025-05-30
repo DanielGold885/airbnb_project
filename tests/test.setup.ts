@@ -1,0 +1,1 @@
+export { test } from '../infra/test_hooks';
