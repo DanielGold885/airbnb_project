@@ -1,6 +1,6 @@
-# HoneyBook Booking Flow Automation (Playwright + TypeScript)
+# HoneyBook Airbnb Flow Automation (Playwright + TypeScript)
 
-This project automates a booking flow on Airbnb using Playwright with TypeScript, following a clean, modular structure.
+This project automates a booking flow on Airbnb using Playwright with TypeScript.
 
 ## 🚀 Getting Started
 
