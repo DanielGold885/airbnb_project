@@ -6,4 +6,10 @@ export const TIMEOUTS = {
   long: 15000,
 };
 
+export const DEFAULT_GUESTS = {
+  adults: 2,
+  children: 1,
+  total: 3,
+};
+
 export const DEFAULT_DESTINATION = 'Tel Aviv';
