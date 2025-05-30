@@ -1,7 +1,6 @@
-import { test, expect } from './fixtures';
+import { test } from '../infra/test_hooks';
 import { getFormattedDateNDaysFromToday } from '../utils/date_utils';
 import { DEFAULT_DESTINATION, DEFAULT_GUESTS } from '../config/test_config';
-import { ListingPage } from '../pages/listing_page';
 import { ResultsPage } from '../pages/results_page';
 import { UrlUtils } from '../utils/url_utils';
 
@@ -11,7 +10,6 @@ test('Step 4: Change booking dates on listing page', async ({ page, context, hom
     const newCheckIn = getFormattedDateNDaysFromToday(5);
     const newCheckOut = getFormattedDateNDaysFromToday(7);
   
-    // Given
     await homePage.navigateToHome();
     await homePage.enterDestination(DEFAULT_DESTINATION);
     await homePage.selectDates(checkIn, checkOut);
@@ -28,11 +26,8 @@ test('Step 4: Change booking dates on listing page', async ({ page, context, hom
     await listingPage.validateGuestCount(DEFAULT_GUESTS.total);
     await listingPage.validateDisplayedDates(checkIn, checkOut);
   
-    // When
     const updated = await listingPage.changeBookingDates(newCheckIn, newCheckOut);
 
-  
-    // Then
     await listingPage.validateUpdatedOrFallbackDates(
       { checkIn, checkOut },
       { checkIn: newCheckIn, checkOut: newCheckOut },
@@ -52,9 +47,4 @@ test('Step 4: Change booking dates on listing page', async ({ page, context, hom
     UrlUtils.assertUrlParam(listingPage.pageInstance, 'checkin', expectedCheckIn);
     UrlUtils.assertUrlParam(listingPage.pageInstance, 'checkout', expectedCheckOut);
     UrlUtils.assertUrlParam(listingPage.pageInstance, 'numberOfAdults', '3');
-
   });
-
-
-  
-//   await page.pause();
