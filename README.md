@@ -7,8 +7,8 @@ This project automates a booking flow on Airbnb using Playwright with TypeScript
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/honeybook-playwright-assignment.git
-cd honeybook-playwright-assignment
+git clone https://github.com/DanielGold885/airbnb_project.git
+cd airbnb_project
 ```
 
 ### 2. Install Dependencies
@@ -19,5 +19,9 @@ npm install
 npx playwright install
 ```
 
-npm install
-npx playwright install
+### 3. Run Tests
+```bash
+npx playwright test
+```
+
+
