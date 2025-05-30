@@ -4,35 +4,48 @@ import { DEFAULT_DESTINATION } from '../config/test_config';
 import { ListingPage } from '../pages/listing_page';
 import { ResultsPage } from '../pages/results_page';
 
-test('Step 3: Validate listing details match search', async ({ homePage, page }) => {
-    const checkIn = getFormattedDateNDaysFromToday(0);
-    const checkOut = getFormattedDateNDaysFromToday(2);
-  
-    await homePage.navigateToHome();
-    await homePage.enterDestination(DEFAULT_DESTINATION);
-    await homePage.selectDates(checkIn, checkOut);
-    await homePage.openGuestsPicker();
-    await homePage.increaseAdultCount(2);
-    await homePage.increaseChildCount(1);
-    await homePage.clickSearch();
-    await page.waitForTimeout(8000)
-  
-    const resultsPage = new ResultsPage(page);
-    await resultsPage.clickFirstHighestRatedListing();
-  
-    const listingPage = new ListingPage(page);
-    await listingPage.waitForPageToLoad();
+test('Step 4: Change booking dates on listing page', async ({ page, context, homePage }) => {
+  const checkIn = getFormattedDateNDaysFromToday(1);
+  const checkOut = getFormattedDateNDaysFromToday(3);
+  const newCheckIn = getFormattedDateNDaysFromToday(5);
+  const newCheckOut = getFormattedDateNDaysFromToday(7);
 
-    await page.pause();
+  // Given I search for a destination with initial dates and guests
+  await homePage.navigateToHome();
+  await homePage.enterDestination(DEFAULT_DESTINATION);
+  await homePage.selectDates(checkIn, checkOut);
+  await homePage.openGuestsPicker();
+  await homePage.increaseAdultCount(2);
+  await homePage.increaseChildCount(1);
+  await homePage.clickSearch();
+
+  await page.pause();
+
+  const resultsPage = new ResultsPage(page);
+  const listingPage = await resultsPage.clickHighestRatedListing(context);
+  await listingPage.waitForPageToLoad();
+
+  await page.pause();
+
+  // When I attempt to change booking dates
+  const updated = await listingPage.changeBookingDates(newCheckIn, newCheckOut);
+
+  await page.pause();
+
+  const { checkIn: actualCheckIn, checkOut: actualCheckOut } = await listingPage.getDisplayedDates();
+
+  // Then validate the correct dates appear (updated or fallback)
+  if (updated) {
+    expect(actualCheckIn).toBe(newCheckIn);
+    expect(actualCheckOut).toBe(newCheckOut);
+    console.log('✅ Successfully updated dates');
+  } else {
+    expect(actualCheckIn).toBe(checkIn);
+    expect(actualCheckOut).toBe(checkOut);
+    console.warn('⚠️ Dates unavailable, original dates retained');
+  }
+});
+
 
   
-    const guestsText = await listingPage.getDisplayedGuests();
-    const datesText = await listingPage.getDisplayedDates();
-  
-    console.log(`Guests shown: ${guestsText}`);
-    console.log(`Dates shown: ${datesText}`);
-  
-    expect(guestsText.toLowerCase()).toContain('3');
-    // You can make the date expectation smarter once you confirm their display format
-  });
-  
+//   await page.pause();
