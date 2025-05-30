@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "CommonJS",
+      "moduleResolution": "Node",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "outDir": "dist",
+      "resolveJsonModule": true,
+      "types": ["node", "playwright"]
+    },
+    "include": ["**/*.ts"],
+    "exclude": ["node_modules"]
+  }
+  
