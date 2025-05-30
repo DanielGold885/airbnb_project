@@ -39,7 +39,8 @@ export class ResultsPage {
       BrowserUtils.waitForNewTab(context),
       bestListing.click()
     ]);
-
+    await this.page.waitForTimeout(2000);
     return new ListingPage(newTab);
   }
+
 }

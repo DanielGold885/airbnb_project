@@ -9,11 +9,11 @@ export class HomePage {
   // Guest picker controls
   private addAdultButton: Locator;
   private removeAdultButton: Locator;
-  private adultCountValue: Locator;
+//   private adultCountValue: Locator;
 
   private addChildButton: Locator;
   private removeChildButton: Locator;
-  private childCountValue: Locator;
+//   private childCountValue: Locator;
 
   constructor(private page: Page) {
     this.destinationInput = page.locator('input[placeholder="Search destinations"]');
@@ -22,11 +22,11 @@ export class HomePage {
 
     this.addAdultButton = page.locator('[data-testid="stepper-adults-increase-button"]').first();
     this.removeAdultButton = page.locator('[data-testid="stepper-adults-decrease-button"]').first();
-    this.adultCountValue = page.locator('[data-testid="stepper-adults-value"]').first();
+    // this.adultCountValue = page.locator('[data-testid="stepper-adults-value"]').first();
 
     this.addChildButton = page.locator('[data-testid="stepper-children-increase-button"]').first();
     this.removeChildButton = page.locator('[data-testid="stepper-children-decrease-button"]').first();
-    this.childCountValue = page.locator('[data-testid="stepper-children-value"]').first();
+    // this.childCountValue = page.locator('[data-testid="stepper-children-value"]').first();
   }
 
   getCalendarDayLocator(date: string) {
