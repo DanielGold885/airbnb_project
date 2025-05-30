@@ -1,5 +1,5 @@
 import { Page, Locator } from '@playwright/test';
-import { BASE_URL } from '../config/constants';
+import { BASE_URL } from '../config/test_config';
 
 
 export class HomePage {
