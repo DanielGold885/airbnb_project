@@ -3,3 +3,7 @@ dist/
 playwright-report/
 test-results/
 .env
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

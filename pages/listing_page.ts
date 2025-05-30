@@ -9,7 +9,6 @@ export class ListingPage {
   private closeCalendarButton: Locator;
   private increaseAdultButton: Locator;
   private reserveButton: Locator;
-//   private closeGuestPickerButton: Locator;
   private calendarDay: (date: string) => Locator;
 
   constructor(private page: Page) {
@@ -19,7 +18,6 @@ export class ListingPage {
     this.guestSummary = page.locator('span._j1kt73:has-text("guests")');
     this.guestSummaryField = page.locator('#GuestPicker-book_it-trigger');
     this.increaseAdultButton = page.locator('[data-testid="GuestPicker-book_it-form-adults-stepper-increase-button"]');
-    // this.closeGuestPickerButton = page.getByRole('button', { name: 'Close' }); // same label as calendar
     this.closeCalendarButton = page.getByRole('button', { name: 'Close' });
     this.reserveButton = this.bookingSidebar.locator('[data-testid="homes-pdp-cta-btn"]');
     this.calendarDay = (date: string) =>
@@ -151,7 +149,6 @@ export class ListingPage {
   }
 
   async clickReserveButton(): Promise<void> {
-    // await this.reserveButton.waitFor({ state: 'visible', timeout: 5000 });
     await this.reserveButton.click();
     console.log('✅ Clicked Reserve button');
   }
