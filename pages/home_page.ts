@@ -1,19 +1,15 @@
 import { Page, Locator } from '@playwright/test';
+import { BASE_URL } from '../config/constants';
+
 
 export class HomePage {
-  // Static locators
   private destinationInput: Locator;
   private guestPickerButton: Locator;
   private searchButton: Locator;
-
-  // Guest picker controls
   private addAdultButton: Locator;
   private removeAdultButton: Locator;
-//   private adultCountValue: Locator;
-
   private addChildButton: Locator;
   private removeChildButton: Locator;
-//   private childCountValue: Locator;
 
   constructor(private page: Page) {
     this.destinationInput = page.locator('input[placeholder="Search destinations"]');
@@ -22,11 +18,9 @@ export class HomePage {
 
     this.addAdultButton = page.locator('[data-testid="stepper-adults-increase-button"]').first();
     this.removeAdultButton = page.locator('[data-testid="stepper-adults-decrease-button"]').first();
-    // this.adultCountValue = page.locator('[data-testid="stepper-adults-value"]').first();
 
     this.addChildButton = page.locator('[data-testid="stepper-children-increase-button"]').first();
     this.removeChildButton = page.locator('[data-testid="stepper-children-decrease-button"]').first();
-    // this.childCountValue = page.locator('[data-testid="stepper-children-value"]').first();
   }
 
   getCalendarDayLocator(date: string) {
@@ -34,7 +28,7 @@ export class HomePage {
   }
 
   async navigateToHome() {
-    await this.page.goto('/');
+    await this.page.goto(BASE_URL);
     await this.destinationInput.waitFor({ state: 'visible', timeout: 10000 });
   }
 

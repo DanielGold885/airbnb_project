@@ -11,6 +11,11 @@ export class ResultsPage {
     this.ratingSpan = (card: Locator) => card.locator('span[aria-hidden="true"]');
   }
 
+  async waitForResultsToLoad(): Promise<void> {
+    await this.page.waitForLoadState('domcontentloaded');
+    await this.listingCards.first().waitFor({ state: 'visible', timeout: 10000 });
+  }
+
   async clickHighestRatedListing(context: BrowserContext): Promise<ListingPage> {
     const cards = await this.listingCards.all();
 
