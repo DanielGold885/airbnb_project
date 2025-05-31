@@ -63,8 +63,6 @@ export class ListingPage {
 
     expect(checkIn).toBe(expectedCheckIn);
     expect(checkOut).toBe(expectedCheckOut);
-
-    console.log(`✅ Dates validated: ${checkIn} → ${checkOut}`);
   }
 
   async validateUpdatedOrFallbackDates(
