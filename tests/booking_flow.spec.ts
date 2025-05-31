@@ -4,7 +4,7 @@ import { DEFAULT_DESTINATION, DEFAULT_GUESTS } from '../config/test_config';
 import { ResultsPage } from '../pages/results_page';
 import { UrlUtils } from '../utils/url_utils';
 
-test('Step 4: Change booking dates on listing page', async ({ page, context, homePage }) => {
+test('Test: Change booking dates on listing page and validate URL params', async ({ page, context, homePage }) => {
     const checkIn = getFormattedDateNDaysFromToday(1);
     const checkOut = getFormattedDateNDaysFromToday(3);
     const newCheckIn = getFormattedDateNDaysFromToday(5);
