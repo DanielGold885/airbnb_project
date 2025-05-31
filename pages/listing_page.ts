@@ -1,4 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { TIMEOUTS } from '../config/timeouts';
 
 export class ListingPage {
   private bookingSidebar: Locator;
@@ -93,7 +94,6 @@ export class ListingPage {
   async validateGuestCount(expectedCount: number): Promise<void> {
     const actual = await this.getDisplayedGuestCount();
     expect(actual).toBe(expectedCount);
-    console.log(`✅ Guest count validated: ${actual}`);
   }
 
   async isDateAvailable(date: string): Promise<boolean> {
@@ -102,21 +102,23 @@ export class ListingPage {
 
   async openGuestsPicker(): Promise<void> {
     await this.guestSummaryField.click();
+    await expect(this.increaseAdultButton).toBeVisible({ timeout: TIMEOUTS.medium });
   }
-  
+
   async increaseAdultCount(times: number = 1): Promise<void> {
     for (let i = 0; i < times; i++) {
       await this.increaseAdultButton.click();
-      await this.page.waitForTimeout(150);
+      await expect(this.increaseAdultButton).toBeEnabled();
     }
   }
 
   async changeBookingDates(newCheckIn: string, newCheckOut: string): Promise<boolean> {
     await this.checkInDate.click();
-    await this.page.waitForTimeout(2000);
 
     const checkInDay = this.calendarDay(newCheckIn);
     const checkOutDay = this.calendarDay(newCheckOut);
+
+    await expect(checkInDay).toBeVisible({ timeout: TIMEOUTS.long });
 
     const checkInAvailable = await checkInDay.isEnabled();
     const checkOutAvailable = await checkOutDay.isEnabled();
@@ -124,6 +126,7 @@ export class ListingPage {
     if (!checkInAvailable || !checkOutAvailable) {
       if (await this.closeCalendarButton.isVisible()) {
         await this.closeCalendarButton.click();
+        await expect(this.closeCalendarButton).toBeHidden({ timeout: TIMEOUTS.long });
       }
       return false;
     }
@@ -136,20 +139,20 @@ export class ListingPage {
 
     if (await this.closeCalendarButton.isVisible()) {
       await this.closeCalendarButton.click();
+      await expect(this.closeCalendarButton).toBeHidden({ timeout: TIMEOUTS.long });
     }
 
-    await this.page.waitForTimeout(800);
     return true;
   }
+
   async closeGuestPicker(): Promise<void> {
     if (await this.closeCalendarButton.isVisible()) {
       await this.closeCalendarButton.click();
-      await this.page.waitForTimeout(500); // for UI collapse
+      await expect(this.closeCalendarButton).toBeHidden({ timeout: TIMEOUTS.short });
     }
   }
 
   async clickReserveButton(): Promise<void> {
     await this.reserveButton.click();
-    console.log('✅ Clicked Reserve button');
   }
 }
