@@ -1,4 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { TIMEOUTS } from '../config/timeouts';
 
 export class ListingPage {
   private bookingSidebar: Locator;
@@ -101,7 +102,7 @@ export class ListingPage {
 
   async openGuestsPicker(): Promise<void> {
     await this.guestSummaryField.click();
-    await expect(this.increaseAdultButton).toBeVisible({ timeout: 3000 });
+    await expect(this.increaseAdultButton).toBeVisible({ timeout: TIMEOUTS.short });
   }
 
   async increaseAdultCount(times: number = 1): Promise<void> {
@@ -117,7 +118,7 @@ export class ListingPage {
     const checkInDay = this.calendarDay(newCheckIn);
     const checkOutDay = this.calendarDay(newCheckOut);
 
-    await expect(checkInDay).toBeVisible({ timeout: 5000 });
+    await expect(checkInDay).toBeVisible({ timeout: TIMEOUTS.medium });
 
     const checkInAvailable = await checkInDay.isEnabled();
     const checkOutAvailable = await checkOutDay.isEnabled();
@@ -125,7 +126,7 @@ export class ListingPage {
     if (!checkInAvailable || !checkOutAvailable) {
       if (await this.closeCalendarButton.isVisible()) {
         await this.closeCalendarButton.click();
-        await expect(this.closeCalendarButton).toBeHidden({ timeout: 3000 });
+        await expect(this.closeCalendarButton).toBeHidden({ timeout: TIMEOUTS.medium });
       }
       return false;
     }
@@ -147,7 +148,7 @@ export class ListingPage {
   async closeGuestPicker(): Promise<void> {
     if (await this.closeCalendarButton.isVisible()) {
       await this.closeCalendarButton.click();
-      await expect(this.closeCalendarButton).toBeHidden({ timeout: 3000 });
+      await expect(this.closeCalendarButton).toBeHidden({ timeout: TIMEOUTS.short });
     }
   }
 
