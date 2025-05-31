@@ -1,5 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 import { BASE_URL } from '../config/test_config';
+import { TIMEOUTS } from '../config/timeouts';
 
 
 export class HomePage {
@@ -29,7 +30,7 @@ export class HomePage {
 
   async navigateToHome() {
     await this.page.goto(BASE_URL);
-    await this.destinationInput.waitFor({ state: 'visible', timeout: 10000 });
+    await this.destinationInput.waitFor({ state: 'visible', timeout: TIMEOUTS.long });
   }
 
   async enterDestination(destination: string) {
@@ -78,7 +79,7 @@ export class HomePage {
   }
 
   async clickSearch() {
-    await this.searchButton.waitFor({ state: 'visible', timeout: 5000 });
+    await this.searchButton.waitFor({ state: 'visible', timeout: TIMEOUTS.medium });
     await this.searchButton.click();
   }
 }

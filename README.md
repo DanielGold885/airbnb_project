@@ -21,7 +21,7 @@ npx playwright install
 
 ### 3. Run Tests
 ```bash
-npx playwright test
+npx playwright test --project=chromium
 ```
 
 

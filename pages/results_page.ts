@@ -1,6 +1,7 @@
 import { Page, Locator, BrowserContext } from '@playwright/test';
 import { ListingPage } from './listing_page';
 import { BrowserUtils } from '../utils/browser_utils';
+import { TIMEOUTS } from '../config/timeouts';
 
 export class ResultsPage {
   private listingCards: Locator;
@@ -13,7 +14,7 @@ export class ResultsPage {
 
   async waitForResultsToLoad(): Promise<void> {
     await this.page.waitForLoadState('domcontentloaded');
-    await this.listingCards.first().waitFor({ state: 'visible', timeout: 10000 });
+    await this.listingCards.first().waitFor({ state: 'visible', timeout: TIMEOUTS.long });
   }
 
   async clickHighestRatedListing(context: BrowserContext): Promise<ListingPage> {
@@ -47,5 +48,4 @@ export class ResultsPage {
     await this.page.waitForTimeout(2000);
     return new ListingPage(newTab);
   }
-
 }

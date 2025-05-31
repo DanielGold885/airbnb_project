@@ -36,7 +36,7 @@ export class ListingPage {
 
   async waitForPageToLoad() {
     await this.page.waitForLoadState('domcontentloaded');
-    await this.bookingSidebar.waitFor({ state: 'visible', timeout: 10000 });
+    await this.bookingSidebar.waitFor({ state: 'visible', timeout: TIMEOUTS.long });
   }
 
   async getDisplayedDates(): Promise<{ checkIn: string; checkOut: string }> {
@@ -148,7 +148,7 @@ export class ListingPage {
   async closeGuestPicker(): Promise<void> {
     if (await this.closeCalendarButton.isVisible()) {
       await this.closeCalendarButton.click();
-      await expect(this.closeCalendarButton).toBeHidden({ timeout: TIMEOUTS.short });
+      await expect(this.closeCalendarButton).toBeHidden({ timeout: TIMEOUTS.medium });
     }
   }
 
