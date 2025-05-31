@@ -10,6 +10,7 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
   },
+  reporter: [['html', { open: 'never' }]],
   projects: [
     {
       name: 'chromium',

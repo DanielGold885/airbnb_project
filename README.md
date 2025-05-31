@@ -24,4 +24,8 @@ npx playwright install
 npx playwright test --project=chromium
 ```
 
+### 4. To View The Report
+```bash
+npx playwright show-report
+```
 
