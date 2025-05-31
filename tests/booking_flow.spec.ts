@@ -1,7 +1,6 @@
 import { test } from '../infra/test_hooks';
 import { getFormattedDateNDaysFromToday } from '../utils/date_utils';
 import { DEFAULT_DESTINATION, DEFAULT_GUESTS } from '../config/test_config';
-// import { ResultsPage } from '../pages/results_page';
 import { UrlUtils } from '../utils/url_utils';
 
 test('Test: Change booking dates on listing page and validate URL params', async ({ context, homePage, resultsPage }) => {
@@ -17,8 +16,7 @@ test('Test: Change booking dates on listing page and validate URL params', async
     await homePage.increaseAdultCount(2);
     await homePage.increaseChildCount(1);
     await homePage.clickSearch();
-  
-    // const resultsPage = new ResultsPage(page);
+
     await resultsPage.waitForResultsToLoad();
 
     const listingPage = await resultsPage.clickHighestRatedListing(context);
